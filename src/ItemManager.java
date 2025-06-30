@@ -33,13 +33,13 @@ public class ItemManager {
     }
 
     public static void addItem() {
-        System.out.print("Enter ID: ");
+        System.out.print("Nhập ID: ");
         String id = scanner.nextLine();
-        System.out.print("Enter Tên: ");
+        System.out.print("Nhập Tên: ");
         String name = scanner.nextLine();
-        System.out.print("Enter Giá : ");
+        System.out.print("Nhập Giá : ");
         double price = Double.parseDouble(scanner.nextLine());
-        System.out.print("Enter Số lương : ");
+        System.out.print("Nhập Số lương : ");
         int quantity = Integer.parseInt(scanner.nextLine());
 
         try {
