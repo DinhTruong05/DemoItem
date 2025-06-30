@@ -1,39 +1,43 @@
 import src.ItemManager;
 
+import java.io.IOException;
 import java.util.Scanner;
 
+import static src.entities.Choice.*;
+
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
-        ItemManager itemManager = new ItemManager();
         while (true) {
-            System.out.println("Vui long chon Menu : ");
+            System.out.println("Chào mừng đến shop Main : ");
             System.out.println("1. Add Item");
             System.out.println("2. Show List Items");
             System.out.println("3. Search Item");
             System.out.println("4. Delete Item");
-            System.out.println("5. Exit");
+            System.out.println("5. Sort Item by Price");
+
+            System.out.println("0. Exit");
+            System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             switch (choice) {
-                case 1:
+                case ACTION_ADD:
                     ItemManager.addItem();
                     break;
-                case 2:
+                case ACTION_SHOW:
                     ItemManager.showListItems();
                     break;
-                case 3:
-                    itemManager.searchItem();
+                case ACTION_SEARCH:
+                    ItemManager.searchItem();
                     break;
-                case 4:
+                case ACTION_DELETE:
                     ItemManager.deleteItem();
                     break;
-                case 5:
-                    System.exit(0);
+                case ACTION_SORT:
+                    ItemManager.sortItem();
+                    break;
+                default:
+                    System.exit(ACTION_EXIT);
             }
-            if (choice == 5) {
-                break;
-            }
-
         }
     }
 }

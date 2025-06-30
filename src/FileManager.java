@@ -1,5 +1,7 @@
 package src;
 
+import src.entities.Item;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

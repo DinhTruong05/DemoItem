@@ -1,26 +1,16 @@
 package src;
 
-import java.io.*;
+import src.entities.Item;
+import src.exception.ItemNotFoundException;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class ItemManager {
     public static Scanner scanner = new Scanner(System.in);
     public static File myFile = new File("resource/products.txt");
-//    static {
-//        try {
-//            File dir = new File("resource");
-//            if (!dir.exists()) {
-//                dir.mkdirs();
-//            }
-//            if (!myFile.exists()) {
-//                myFile.createNewFile();
-//            }
-//        } catch (IOException e) {
-//            System.err.println(" Could not create file or directory: " + e.getMessage());
-//        }
-//    }
-
     public static void showListItems() {
         try {
             List<Item> items = FileManager.readDataFromFile(myFile);
@@ -81,7 +71,7 @@ public class ItemManager {
         }
     }
 
-    public void searchItem() {
+    public static void searchItem() {
         System.out.print("Enter name or ID to search: ");
         String keyword = scanner.nextLine().toLowerCase();
 
@@ -102,4 +92,58 @@ public class ItemManager {
             System.err.println("IO Error: " + e.getMessage());
         }
     }
+
+    public static void sortItem() throws IOException {
+        label:
+        while (true) {
+            List<Item> items = FileManager.readDataFromFile(myFile);
+            System.out.println(" Vui lòng chọn loại sắp xếp : ");
+            System.out.println("1. Theo giá tăng dần ");
+            System.out.println("2. Theo giá giảm dần ");
+            System.out.println("0. Quay lại menu chính ");
+
+            System.out.print("Enter your choice:");
+            String choice = scanner.nextLine();
+
+            if (choice.equals("0")) {
+                break;
+            }
+
+            switch (choice) {
+                case "1":
+                    for (int i = 0; i < items.size(); i++) {
+                        for (int j = i + 1; j < items.size(); j++) {
+                            if (items.get(i).getPrice() > items.get(j).getPrice()) {
+                                Item temp = items.get(i);
+                                items.set(i, items.get(j));
+                                items.set(j, temp);
+                            }
+                        }
+                    }
+                    break;
+                case "2":
+                    for (int i = 0; i < items.size(); i++) {
+                        for (int j = i + 1; j < items.size(); j++) {
+                            if (items.get(i).getPrice() < items.get(j).getPrice()) {
+                                Item temp = items.get(i);
+                                items.set(i, items.get(j));
+                                items.set(j, temp);
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    System.out.println(" Lựa chọn không hợp lệ. Vui lòng thử lại.");
+                    continue;
+            }
+
+//            FileManager.writeDataToFile(myFile, items);
+//            System.out.println("Đã sắp xếp và cập nhật file.");
+            for (Item item : items) {
+                System.out.println(item);
+            }
+        }
+    }
 }
+
+
