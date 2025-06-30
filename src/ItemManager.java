@@ -94,7 +94,6 @@ public class ItemManager {
     }
 
     public static void sortItem() throws IOException {
-        label:
         while (true) {
             List<Item> items = FileManager.readDataFromFile(myFile);
             System.out.println(" Vui lòng chọn loại sắp xếp : ");
@@ -137,8 +136,6 @@ public class ItemManager {
                     continue;
             }
 
-//            FileManager.writeDataToFile(myFile, items);
-//            System.out.println("Đã sắp xếp và cập nhật file.");
             for (Item item : items) {
                 System.out.println(item);
             }
