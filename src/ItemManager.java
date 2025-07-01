@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class ItemManager {
     public static Scanner scanner = new Scanner(System.in);
     public static File myFile = new File("resource/products.txt");
+    public static File binaryFile = new File("resource/products.bin");
     public static void showListItems() {
         try {
             List<Item> items = FileManager.readDataFromFile(myFile);
@@ -19,6 +20,17 @@ public class ItemManager {
             }
         } catch (IOException e) {
             System.err.println("IO Error: " + e.getMessage());
+        }
+    }
+
+    public static void showListItemsFromBinary() {
+        try {
+            List<Item> items = FileManager.readBinaryFile(binaryFile);
+            for (Item item : items) {
+                System.out.println(item);
+            }
+        } catch (IOException e) {
+            System.err.println("Lỗi khi đọc file nhị phân: " + e.getMessage());
         }
     }
 
@@ -35,7 +47,10 @@ public class ItemManager {
         try {
             List<Item> items = FileManager.readDataFromFile(myFile);
             items.add(new Item(id, name, price, quantity));
+
             FileManager.writeDataToFile(myFile, items);
+            FileManager.writeBinaryFile(binaryFile, items);
+
             System.out.println(" Sản phẩm đã được thêm ! ");
         } catch (IOException e) {
             System.err.println("IO Error: " + e.getMessage());

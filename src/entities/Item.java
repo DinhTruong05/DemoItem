@@ -1,6 +1,9 @@
 package src.entities;
 
-public class Item {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Item implements Serializable {
     private String id;
     private String name;
     private double price;
@@ -44,6 +47,9 @@ public class Item {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Override
     public String toString() {

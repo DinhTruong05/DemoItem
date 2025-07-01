@@ -38,4 +38,19 @@ public class FileManager {
             }
         }
     }
+
+    public static void writeBinaryFile(File file, List<Item> items) throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+            oos.writeObject(items);
+        }
+    }
+
+    public static List<Item> readBinaryFile(File file) throws IOException {
+        if (!file.exists()) return new ArrayList<>();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            return (List<Item>) ois.readObject();
+        } catch (ClassNotFoundException e) {
+            throw new IOException("Class not found during deserialization", e);
+        }
+    }
 }
